@@ -14,9 +14,8 @@ const UserList = ({ users, usersLoaded, apiService}) => {
         if (isLoaded ===false){
             apiService.getPeople().then((data) => {
                 usersLoaded(data);
+                setIsLoaded(!isLoaded);
             });
-
-            setIsLoaded(!isLoaded);
         }
     },[isLoaded, apiService, usersLoaded]);
 
