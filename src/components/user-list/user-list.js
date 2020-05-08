@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import './user-list.scss';
 import UserListItem from "../user-list-item";
 import { connect } from "react-redux";
@@ -25,15 +25,25 @@ const UserList = ({ users, usersLoaded, apiService}) => {
     }
 
     return (
-        <ul className="list-group">
-            {
-                users.map((user) => {
-                    return(
-                        <li key = {user.id} className="user-list list-group-item"><UserListItem user = { user }/> </li>
-                    )
-                })
-            }
-        </ul>
+        <Fragment>
+            <ul className="list-group">
+                {
+                    users.map((user) => {
+                        return(
+                            <li key = {user.id} className="user-list list-group-item"><UserListItem user = { user }/></li>
+                        )
+                    })
+                }
+            </ul>
+            <button type="button" className="btn btn-secondary addmore"
+                    onClick={ ()=>{
+                        apiService.getPeople().then((data) => {
+                            usersLoaded(data);
+                        });
+                    }}
+            > Add More People
+            </button>
+        </Fragment>
     );
 };
 
