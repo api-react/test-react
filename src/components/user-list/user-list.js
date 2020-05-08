@@ -4,6 +4,7 @@ import UserListItem from "../user-list-item";
 import { connect } from "react-redux";
 import { withApiService } from "../hoc";
 import Spinner from "../spinner";
+import {peopleLoaded} from "../../actions"
 
 
 const UserList = ({ users, usersLoaded, apiService}) => {
@@ -55,10 +56,7 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         usersLoaded: (newUsers) =>{
-            dispatch({
-                type: 'USERS_LOADED',
-                payload: newUsers
-            })
+            dispatch(peopleLoaded(newUsers))
         }
     };
 };
